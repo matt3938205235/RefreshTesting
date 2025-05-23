@@ -71,8 +71,7 @@
             refreshButton.disabled = true; // Disable button during fetch
 
             try {
-                // The API key is provided by the Canvas environment for Gemini API calls.
-                const apiKey = ""; // Leave this empty, Canvas will inject the key.
+                const apiKey = GEMINI_API_KEY;
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
                 const prompt = "Generate a single, interesting, and concise random fact.";
