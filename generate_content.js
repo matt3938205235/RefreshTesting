@@ -24,7 +24,7 @@ async function generateAIContent() {
     // For GitHub Actions, __app_id and __firebase_config are not directly available for LLM calls.
     // The API key for Gemini API should be set as a GitHub Secret (e.g., GEMINI_API_KEY)
     // and passed as an environment variable to this script.
-    const apiKey = process.env.GEMINI_API_KEY || "AIzaSyA4kk0qBB4-WNLNM0oYC_JNWj-gTwF6YYo"; // Placeholder for API key
+    const apiKey = process.env.GEMINI_API_KEY || ""; // Placeholder for API key
 
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
