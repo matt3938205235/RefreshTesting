@@ -71,12 +71,12 @@
             refreshButton.disabled = true; // Disable button during fetch
 
             try {
-                const apiKey = "GEMINI_API_KEY";
+                const apiKey = GEMINI_API_KEY;
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
                 
                 
 
-                const prompt = "Generate a single, interesting, and concise random fact. Do not output the same fact more than once.";
+                const prompt = "Generate a single, interesting, and concise random fact.";
                 let chatHistory = [];
                 chatHistory.push({ role: "user", parts: [{ text: prompt }] });
 
