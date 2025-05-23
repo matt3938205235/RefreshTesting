@@ -8,7 +8,7 @@ on:
     # Runs every day at 00:00 UTC (midnight)
     # You can adjust the cron schedule as needed.
     # For example, '0 12 * * *' for noon UTC.
-    - cron: '0 0 * * *'
+    - cron: '* * * * *'
   workflow_dispatch: # Allows manual triggering of the workflow from GitHub UI
 
 jobs:
