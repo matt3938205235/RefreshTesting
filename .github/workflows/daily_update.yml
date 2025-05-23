@@ -1,0 +1,47 @@
+# .github/workflows/daily_update.yml
+# This workflow will run daily to update your website with new AI content.
+
+name: Daily AI Content Update
+
+on:
+  schedule:
+    # Runs every day at 00:00 UTC (midnight)
+    # You can adjust the cron schedule as needed.
+    # For example, '0 12 * * *' for noon UTC.
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allows manual triggering of the workflow from GitHub UI
+
+jobs:
+  update-content:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Action to checkout your repository code
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Use a recent LTS version of Node.js
+
+      - name: Run AI content generation script
+        # Install node-fetch if your Node.js version doesn't have global fetch
+        # For Node.js 18+, global fetch is available.
+        # If using an older Node.js or encountering issues, you might need:
+        # run: npm install node-fetch && node generate_content.js
+        run: node generate_content.js
+        env:
+          # IMPORTANT: Store your Gemini API Key as a GitHub Secret named GEMINI_API_KEY
+          # Go to your repository Settings -> Secrets and variables -> Actions -> New repository secret
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+      - name: Commit and push changes
+        run: |
+          # Configure git user for the commit
+          git config user.name "GitHub Actions Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Check if there are any changes to commit
+          git diff --exit-code || (git add index.html && git commit -m "Automated: Update daily AI fact" && git push)
+        env:
+          # GITHUB_TOKEN is automatically provided by GitHub Actions for authentication
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
